@@ -1,0 +1,238 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Red Green Refactor</title>
+<meta name="viewport" content="width=device-width, initialscale=1.0, user-scalable=no">
+</meta>
+<style>
+/*.screen {
+	width: 320px;
+	height: 480px;
+	float: left;
+	color: white;
+	position: relative;
+	font-size: 50px;
+	text-align: center;
+	top: 0px;
+	left: 0px;
+	-webkit-transition-duration: 600ms;
+	-webkit-transition-property: translate;
+	-webkit-transform: translate (-320px, 0px);
+}*/
+
+body {
+	margin: 0px;
+	padding: 0px;
+}
+#red {
+	-webkit-transition-duration: 600ms;
+	-webkit-transition-property: translate;
+	-webkit-transform: translate (0px, 0px);
+	transform: translate(0px, 0px);
+	transition-duration: 600ms;
+	transition-property: all;
+	background: red;
+	position: absolute;
+	width: 320px;
+	/*height: 480px;*/
+	top: 0px;
+}
+#green {
+	-webkit-transition-duration: 600ms;
+	-webkit-transition-property: translate;
+	-webkit-transform: translate (0px, 0px);
+	background: green;
+	transform: translate(0px, 0px);
+	transition-duration: 600ms;
+	transition-property: all;
+}
+#refactor {
+	background: blue;
+}
+.wrapper {
+	width: 320px;
+	/*height: 1080px;*/
+	/*overflow-y: scroll;*/
+	float: left;
+	background-color: #FF0;
+	left: 0px;
+	top: 0px;/*height:100%;*/
+}
+#list {
+	width: 320px;
+	/*height: 1080px;*/
+	position: relative;
+	-webkit-transition-duration: 600ms;
+	-webkit-transition-property: translate;
+	-webkit-transform: translate (0px, 0px);
+	transform: translate(0px, 0px);
+	transition-duration: 600ms;
+	transition-property: all;
+	z-index: 10;
+	background-color: #F0F
+}
+#list ul {
+	margin: 0px;
+	padding: 0px;
+}
+#list ul li {
+	display: block;
+	list-style-type: none;
+}
+#list ul li a {
+	display: block;
+	background-color: #FC9;
+	padding: 10px;
+	border-bottom: #FF9900 solid 1px;
+	text-decoration: none;
+	color: #000;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	float:left;
+	 width:300px;
+}
+#list ul li a:hover {
+	display: block;
+	background-color: #F99;
+	padding: 10px;
+	border-bottom: #FF9900 solid 1px;
+	text-decoration: none;
+	color: #000
+}
+.animCss {
+	-webkit-transition-duration: 600ms;
+	-webkit-transition-property: translate;
+	-webkit-transform: translate (320px, 0px);
+	transform: translate(320px, 0px);
+	transition-duration: 600ms;
+	transition-property: all;
+}
+
+.video_link img{ float:left; width:90px; margin-right:10px;}
+.video_link span{ float:left; width:195px;}
+.listvData li{ display:block; float:left; width:320px;}
+</style>
+<script src="cordova-2.4.0.js"></script>
+<script src="jquery-1.9.1.min.js"></script>
+<script>
+$(document).ready(function(e) {
+	//var changeColor = $('#list li a');
+	$('#list li a').click(function(e) {
+        e.preventDefault();
+		$('#list li a').css({color:'blue',backgroundColor:'#fff'});
+		$(this).css({color:'#FFFFFF',backgroundColor:'#000'});
+		$("#list").css('transform','translate(-320px,0px)');
+		$("#red").css('transform','translate(0px,0px)');
+		$("#green").css('transform','translate(320px,0px)');
+    });
+
+	var WrapperDiv = $('#WrapperDiv');// main wrapper	
+	device_wid = WrapperDiv.outerWidth();	
+	
+	$('#WrapperDiv div').each(function(index, element) {
+		$(this).css('transform','translate('+ index * device_wid +'px,0px)');  
+    });
+	
+	//var WrapperDivLenght = $('#WrapperDiv div').length();
+	$('#red').click(function(e) {
+		e.preventDefault();
+		$("#list").css('transform','translate(-640px,0px)');
+		$("#red").css('transform','translate(-320px,0px)');
+		$("#green").css('transform','translate(0px,0px)');
+    });
+
+});
+
+</script>
+<script type="text/javascript">
+	var i = 3;
+  var newLength = 3;
+    /*var newLength = i +7;*/
+  var data1;
+  
+  var entriesLength;
+  
+  
+function showMyVideos(data) {
+	data1 = data;
+  var myTitle, videoSrc, imgSrc, pubDate,videoId; 
+  var feed = data.feed;
+  var entries = feed.entry;
+  //console.log(entries.length);
+  
+   entriesLength = entries.length;
+  //console.log(entriesLength + '---- length');
+ // var html = ['<ul data-role="listview">'];
+  for (i; i < newLength ; i++) {
+	  //console.log(i);
+		var entry = entries[i];
+		videoId = entry.id.$t.substr(entry.id.$t.length-11,11);
+		myTitle = entry.title.$t; //Video Title
+		/*imgSrc ="http://i4.ytimg.com/vi/"+ videoId +"/default.jpg" //Thunb Src/*/
+		var str = '<a href="#red" class="video_link" name="http://www.youtube.com/embed/'+ videoId +'"><img src="http://i4.ytimg.com/vi/'+videoId+'/default.jpg"> <span>'+myTitle+'</span></a>';
+	//	html.push('<li>', str, '</li>');
+		$('.listvData').append('<li>' + str + '</li>');
+	
+	
+	}
+}
+$('.video_link').click(function(e) {
+            	$('#video_iframe').attr('src',$(this).attr('name'));
+       		 });
+$(window).scroll(function(e) {
+   var scrollPos = $(this).scrollTop();
+
+   var docHeight = $(document).height();
+
+   var winheight = $(window).height();
+
+   var heightPer = (scrollPos/(docHeight-winheight))*100;
+
+  var scrolltrigger = 80;
+  //console.log('ds' + heightPer);
+  if  ( heightPer > scrolltrigger) {
+	 console.log($('.listvData li').length);
+	   if ($('.listvData li').length <= entriesLength ){
+		     
+			newLength = newLength + 5;
+			console.log(newLength);
+	   		
+      		showMyVideos(data1); 
+			
+			//$('ul').listview('refresh');  
+			
+			
+			
+			
+		}
+	   
+     }
+   
+}); 
+
+
+</script>
+</head>
+
+<body>
+<div class="wrapper" style="" id="WrapperDiv">
+  <div id="list">
+    <ul class="listvData">
+      <li><a name="http://www.youtube.com/embed/IfS8PPtKl3c" class="video_link"  href="#red"><img src="images/thumb/1.jpg" class="ui-li-thumb"> <span>Ram Kapoor - Watch all Mere Dad Ki Maruti Videos on youtube.com</span></a></li>
+      <li><a name="http://www.youtube.com/embed/iunwF9lYY_8" class="video_link"  href="#red"><img src="images/thumb/2.jpg" class="ui-li-thumb"> <span>Rhea Chakraborty - Watch all Mere Dad Ki Maruti Videos on youtube.com</span></a></li>
+      <li><a name="http://www.youtube.com/embed/IHMxwtvW0_Y" class="video_link"  href="#red"><img src="images/thumb/3.jpg" class="ui-li-thumb"> <span>Saqib Saleem - Watch all Mere Dad Ki Maruti Videos on youtube.com</span></a></li>
+      <li><a name="http://www.youtube.com/embed/m6SNpaWnuc4" class="video_link" href="#red"><img src="images/thumb/4.jpg"> <span>Who is Nishant Dahiya? Rahul Sareen from Mujhse Fraaandship Karoge</span></a></li>
+      <li><a name="http://www.youtube.com/embed/m6SNpaWnuc4" class="video_link" href="#red"><img src="images/thumb/5.jpg"> <span>Who is Nishant Dahiya? Rahul Sareen from Mujhse Fraaandship Karoge</span></a></li>
+      <li><a name="http://www.youtube.com/embed/qj-pIh6nK2k" class="video_link" href="#red"><img src="images/thumb/6.jpg"> <span>Rhea and the girls enter Gollu's party in style - Scene - Luv Ka The End</span></a></li>
+    </ul>
+  </div>
+  <div class="" id="red">RED<br>
+    <iframe id="video_iframe" width="250" height="175" src="http://www.youtube.com/embed/_hsYcW3cZZE" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <!--<div class="" id="green">GREEN</div>--> 
+  <!--<div class="screen" id="refactor">REFACTOR</div>--> 
+</div>
+<script type="text/javascript" src="http://gdata.youtube.com/feeds/users/ytube/uploads?&alt=json-in-script&format=5&callback=showMyVideos"></script>
+</body>
+</html>
