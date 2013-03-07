@@ -142,12 +142,18 @@ $(document).ready(function(e) {
 		$("#green").css('transform','translate(0px,0px)');
     });
 
+
+$('.video_link').click(function(e) {
+	
+	            	$('#video_iframe').attr('src',$(this).attr('name'));
+       		 });
+
 });
 
 </script>
 <script type="text/javascript">
-	var i = 3;
-  var newLength = 3;
+	var i = 6;
+  var newLength = 6;
     /*var newLength = i +7;*/
   var data1;
   
@@ -159,7 +165,7 @@ function showMyVideos(data) {
   var myTitle, videoSrc, imgSrc, pubDate,videoId; 
   var feed = data.feed;
   var entries = feed.entry;
-  //console.log(entries.length);
+ console.log(entries.length);
   
    entriesLength = entries.length;
   //console.log(entriesLength + '---- length');
@@ -168,6 +174,7 @@ function showMyVideos(data) {
 	  //console.log(i);
 		var entry = entries[i];
 		videoId = entry.id.$t.substr(entry.id.$t.length-11,11);
+		console.log();
 		myTitle = entry.title.$t; //Video Title
 		/*imgSrc ="http://i4.ytimg.com/vi/"+ videoId +"/default.jpg" //Thunb Src/*/
 		var str = '<a href="#red" class="video_link" name="http://www.youtube.com/embed/'+ videoId +'"><img src="http://i4.ytimg.com/vi/'+videoId+'/default.jpg"> <span>'+myTitle+'</span></a>';
@@ -177,9 +184,7 @@ function showMyVideos(data) {
 	
 	}
 }
-$('.video_link').click(function(e) {
-            	$('#video_iframe').attr('src',$(this).attr('name'));
-       		 });
+
 $(window).scroll(function(e) {
    var scrollPos = $(this).scrollTop();
 
@@ -227,7 +232,7 @@ $(window).scroll(function(e) {
       <li><a name="http://www.youtube.com/embed/qj-pIh6nK2k" class="video_link" href="#red"><img src="images/thumb/6.jpg"> <span>Rhea and the girls enter Gollu's party in style - Scene - Luv Ka The End</span></a></li>
     </ul>
   </div>
-  <div class="" id="red">RED<br>
+  <div class="" id="red">
     <iframe id="video_iframe" width="250" height="175" src="http://www.youtube.com/embed/_hsYcW3cZZE" frameborder="0" allowfullscreen></iframe>
   </div>
   <!--<div class="" id="green">GREEN</div>--> 
