@@ -118,6 +118,17 @@ body {
 <script src="cordova-2.4.0.js"></script>
 <script src="jquery-1.9.1.min.js"></script>
 <script>
+document.addEventListener("deviceready", onDeviceReady, false);
+
+    // Cordova is ready
+    //
+    function onDeviceReady() {
+        navigator.splashscreen.show();
+    }
+
+
+
+
 $(document).ready(function(e) {
 	//var changeColor = $('#list li a');
 	$('#list li a').click(function(e) {
