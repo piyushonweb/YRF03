@@ -14,7 +14,7 @@ YRF Application03
 Your Name
 </author>
 
-<preference name="load-url-timeout" value="20000" />
+<preference name="load-url-timeout" value="60000" />
 
 <preference name="phonegap-version" value="2.2.0" />
     <preference name="orientation" value="portrait" />
