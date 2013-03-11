@@ -332,24 +332,20 @@ if (hasHardwareAcceleration) {
 	//oldScreenEle.style.display = 'none';
 }
 
-
-	document.getElementById('touchstart').getElementsByTagName('a').addEventListener('touchstart', navAnim, false);
-        //document.getElementById('touchend').addEventListener('touchend', bye, false);
-
 function navAnim()
 {
 	
 	
 	
-        
- 
-	
+        document.getElementById('listData').getElementsByTagName('a').addEventListener('touchstart', hello, false);
+        document.getElementById('touchend').addEventListener('touchend', bye, false);
+ 	
 	
 	
 	
 	$("#list").addClass('active');
 	//var changeColor = $('#list li a');
-	
+	$('#list li a').click(function(e) {
 		
 		//$('#list li a').css({color:'blue',backgroundColor:'#fff'});
 		//$(this).css({color:'#FFFFFF',backgroundColor:'#000'});
@@ -363,7 +359,9 @@ function navAnim()
 		
 		//$("#red").css('left','0px');
 		//$("#green").css('left','100%');
-	
+		return false;
+    });
+
 
 
 	var WrapperDiv = $('#WrapperDiv');// main wrapper	
@@ -486,7 +484,7 @@ $(window).scroll(function(e) {
     <div class="yrf_title">
       <h1>YRF</h1>
     </div>
-    <ul class="listvData">
+    <ul class="listvData" id="listData">
       <li><a name="http://www.youtube.com/embed/IfS8PPtKl3c" class="video_link"  href="javascript:void(0);"><img src="images/thumb/1.jpg" class="ui-li-thumb"> <span>Ram Kapoor - Watch all Mere Dad Ki Maruti Videos on youtube.com</span></a></li>
       <li><a name="http://www.youtube.com/embed/iunwF9lYY_8" class="video_link"  href="javascript:void(0);"><img src="images/thumb/2.jpg" class="ui-li-thumb"> <span>Rhea Chakraborty - Watch all Mere Dad Ki Maruti Videos on youtube.com</span></a></li>
       <li><a name="http://www.youtube.com/embed/IHMxwtvW0_Y" class="video_link"  href="javascript:void(0);"><img src="images/thumb/3.jpg" class="ui-li-thumb"> <span>Saqib Saleem - Watch all Mere Dad Ki Maruti Videos on youtube.com</span></a></li>
