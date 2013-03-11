@@ -35,6 +35,7 @@ body {
 	transition-duration: 600ms;
 	transition-property: all;*/
 	background: red;
+	display:none;
 	/*z-index:2;*/
 	
 }
@@ -147,7 +148,7 @@ body {
 	left:0px;
 	top:0px;
 	min-height:648px;
-	display:none;
+	display:block;
 }
 
 .slide.out, .slide.in {
@@ -297,6 +298,7 @@ to {
 </style>
 <script src="cordova-2.4.0.js"></script>
 <script src="jquery-1.9.1.min.js"></script>
+
 <script>
 document.addEventListener("deviceready", onDeviceReady, false);
 
@@ -306,11 +308,12 @@ document.addEventListener("deviceready", onDeviceReady, false);
         navigator.splashscreen.show();
     }
 
-
+document.getElementById('listData').getElementsByTagName('a').addEventListener('touchstart', navAnim, false);
 
 
 $(document).ready(function(e) {
-	navAnim();
+	//navAnim();
+	$("#list").addClass('active');
 });
 
 </script>
@@ -319,99 +322,6 @@ $(document).ready(function(e) {
 
 
 <script type="text/javascript">
-var hasHardwareAcceleration = false;
-
-
-if (hasHardwareAcceleration) {
-	
-	navAnim();
-	//newScreenEle.style.webkitTransform ='translate(0px,0px)';
-	//oldScreenEle.style.webkitTransform = 'translate(-320px,0px)';
-} else {
-	//newScreenEle.style.display = 'block';
-	//oldScreenEle.style.display = 'none';
-}
-
-
-	document.getElementById('touchstart').getElementsByTagName('a').addEventListener('touchstart', navAnim, false);
-        //document.getElementById('touchend').addEventListener('touchend', bye, false);
-
-function navAnim()
-{
-	
-	
-	
-        
- 
-	
-	
-	
-	
-	$("#list").addClass('active');
-	//var changeColor = $('#list li a');
-	
-		
-		//$('#list li a').css({color:'blue',backgroundColor:'#fff'});
-		//$(this).css({color:'#FFFFFF',backgroundColor:'#000'});
-		
-		$("#list").addClass('slide').addClass('out');
-		$('#red').removeClass('out').removeClass('slide').removeClass('reverse');
-		//$("#list").addClass('active_none');
-		$("#red").addClass('slide').addClass('in').addClass('active');
-		//$("#list").addClass('active_none');
-		//$('#red').removeClass('slide').removeClass('in');;
-		
-		//$("#red").css('left','0px');
-		//$("#green").css('left','100%');
-	
-
-
-	var WrapperDiv = $('#WrapperDiv');// main wrapper	
-	device_wid = WrapperDiv.outerWidth();	
-
-
-	
-	$('#WrapperDiv .page').each(function(index, element) {
-		//$(this).addClass('active_none');
-		//$('.page:first').addClass('active');
-		
-		//var calc = ;
-		//$(this).css('transform','translate('+ index * device_wid +'px,0px)'); 
-			 
-		//console.log(calc);
-    });
-	
-	//var WrapperDivLenght = $('#WrapperDiv div').length();
-	/*$('#red').click(function(e) {
-		e.preventDefault();
-		$("#list").css('left','-200%');
-		$("#red").css('left','-100%');
-		$("#green").css('left','0%');
-    });*/
-	
-	$('.btn_back').click(function(e) {
-    
-	$('#red').removeClass('in').addClass('slide').addClass('out').addClass('reverse');
-	$("#list").addClass('slide').addClass('in').addClass('reverse');
-	//$('#red').removeClass('slide').removeClass('out').removeClass('reverse');
-	$("#list").removeClass('slide').removeClass('in').removeClass('out').removeClass('reverse');
-	//$('#red').removeClass('out').removeClass('slide').removeClass('out').removeClass('reverse');
-		//$("#red").css('left',(device_wid) + 'px');
-		// $("#list").css('left','0%');
-		
-		
-		return false;
-		
-    });  
-
-$('.video_link').click(function(e) {
-	
-	            	$('#video_iframe').attr('src',$(this).attr('name'));
-					
-					return false;
-       		 });
-}
-
 	var i = 8;
   var newLength = 8;
     /*var newLength = i +7;*/
@@ -425,7 +335,7 @@ function showMyVideos(data) {
   var myTitle, videoSrc, imgSrc, pubDate,videoId; 
   var feed = data.feed;
   var entries = feed.entry;
- console.log(entries.length);
+  //console.log(entries.length);
   
    entriesLength = entries.length;
   //console.log(entriesLength + '---- length');
@@ -434,17 +344,18 @@ function showMyVideos(data) {
 	  //console.log(i);
 		var entry = entries[i];
 		videoId = entry.id.$t.substr(entry.id.$t.length-11,11);
-		console.log();
 		myTitle = entry.title.$t; //Video Title
 		/*imgSrc ="http://i4.ytimg.com/vi/"+ videoId +"/default.jpg" //Thunb Src/*/
-		var str = '<a href="javascript:void(0);" class="video_link" name="http://www.youtube.com/embed/'+ videoId +'"><img src="http://i4.ytimg.com/vi/'+videoId+'/default.jpg"> <span>'+myTitle+'</span></a>';
+		var str = '<a href="#red" class="video_link" name="http://www.youtube.com/embed/'+ videoId +'"><img src="http://i4.ytimg.com/vi/'+videoId+'/default.jpg"> <span>'+myTitle+'</span></a>';
 	//	html.push('<li>', str, '</li>');
 		$('.listvData').append('<li>' + str + '</li>');
 	
 	
 	}
 }
-
+$('.video_link').click(function(e) {
+            	$('#video_iframe').attr('src',$(this).attr('name'));
+       		 });
 $(window).scroll(function(e) {
    var scrollPos = $(this).scrollTop();
 
@@ -463,11 +374,11 @@ $(window).scroll(function(e) {
 			newLength = newLength + 5;
 			console.log(newLength);
 	   		
-      		//showMyVideos(data1); 
+      		showMyVideos(data1); 
 			
 			//$('ul').listview('refresh');  
 			
-				//navAnim();
+			
 			
 			
 		}
@@ -486,7 +397,7 @@ $(window).scroll(function(e) {
     <div class="yrf_title">
       <h1>YRF</h1>
     </div>
-    <ul class="listvData">
+    <ul class="listvData" id="listData">
       <li><a name="http://www.youtube.com/embed/IfS8PPtKl3c" class="video_link"  href="javascript:void(0);"><img src="images/thumb/1.jpg" class="ui-li-thumb"> <span>Ram Kapoor - Watch all Mere Dad Ki Maruti Videos on youtube.com</span></a></li>
       <li><a name="http://www.youtube.com/embed/iunwF9lYY_8" class="video_link"  href="javascript:void(0);"><img src="images/thumb/2.jpg" class="ui-li-thumb"> <span>Rhea Chakraborty - Watch all Mere Dad Ki Maruti Videos on youtube.com</span></a></li>
       <li><a name="http://www.youtube.com/embed/IHMxwtvW0_Y" class="video_link"  href="javascript:void(0);"><img src="images/thumb/3.jpg" class="ui-li-thumb"> <span>Saqib Saleem - Watch all Mere Dad Ki Maruti Videos on youtube.com</span></a></li>

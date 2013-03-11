@@ -337,12 +337,6 @@ function navAnim()
 	
 	
 	
-        document.getElementById('listData').getElementsByTagName('a').addEventListener('touchstart', hello, false);
-        document.getElementById('touchend').addEventListener('touchend', bye, false);
- 	
-	
-	
-	
 	$("#list").addClass('active');
 	//var changeColor = $('#list li a');
 	$('#list li a').click(function(e) {
@@ -461,11 +455,11 @@ $(window).scroll(function(e) {
 			newLength = newLength + 5;
 			console.log(newLength);
 	   		
-      		//showMyVideos(data1); 
+      		showMyVideos(data1); 
 			
 			//$('ul').listview('refresh');  
 			
-				//navAnim();
+				navAnim();
 			
 			
 		}
