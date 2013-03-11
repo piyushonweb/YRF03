@@ -296,7 +296,6 @@ to {
 .active_none{ display:none;}
 </style>
 <script src="phonegap.js"></script>
-<script src="cordova-2.4.0.js"></script>
 <script src="jquery-1.9.1.min.js"></script>
 <script>
 document.addEventListener("deviceready", onDeviceReady, false);
@@ -310,23 +309,17 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 
 
-$(document).ready(function(e) {
+/*$(document).ready(function(e) {
 	$("#list").addClass('active');
-	//var changeColor = $('#list li a');
+	
 	$('#list li a').click(function(e) {
 		
-		//$('#list li a').css({color:'blue',backgroundColor:'#fff'});
-		//$(this).css({color:'#FFFFFF',backgroundColor:'#000'});
 		
 		$("#list").addClass('slide').addClass('out');
 		$('#red').removeClass('out').removeClass('slide').removeClass('reverse');
-		//$("#list").addClass('active_none');
+	
 		$("#red").addClass('slide').addClass('in').addClass('active');
-		//$("#list").addClass('active_none');
-		//$('#red').removeClass('slide').removeClass('in');;
-		
-		//$("#red").css('left','0px');
-		//$("#green").css('left','100%');
+	
 		return false;
     });
 
@@ -338,34 +331,17 @@ $(document).ready(function(e) {
 
 	
 	$('#WrapperDiv .page').each(function(index, element) {
-		//$(this).addClass('active_none');
-		//$('.page:first').addClass('active');
 		
-		//var calc = ;
-		//$(this).css('transform','translate('+ index * device_wid +'px,0px)'); 
-			 
-		//console.log(calc);
     });
 	
-	//var WrapperDivLenght = $('#WrapperDiv div').length();
-	/*$('#red').click(function(e) {
-		e.preventDefault();
-		$("#list").css('left','-200%');
-		$("#red").css('left','-100%');
-		$("#green").css('left','0%');
-    });*/
-	
+		
 	$('.btn_back').click(function(e) {
     
 	$('#red').removeClass('in').addClass('slide').addClass('out').addClass('reverse');
 	$("#list").addClass('slide').addClass('in').addClass('reverse');
-	//$('#red').removeClass('slide').removeClass('out').removeClass('reverse');
+	
 	$("#list").removeClass('slide').removeClass('in').removeClass('out').removeClass('reverse');
-	//$('#red').removeClass('out').removeClass('slide').removeClass('out').removeClass('reverse');
-		//$("#red").css('left',(device_wid) + 'px');
-		// $("#list").css('left','0%');
-		
-		
+	
 		return false;
 		
     });  
@@ -377,7 +353,7 @@ $('.video_link').click(function(e) {
 					
        		 });
 
-});
+});*/
 
 </script>
 <script type="text/javascript">
