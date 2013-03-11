@@ -319,7 +319,18 @@ $(document).ready(function(e) {
 
 
 <script type="text/javascript">
+var hasHardwareAcceleration = false;
 
+
+if (hasHardwareAcceleration) {
+	
+	navAnim();
+	//newScreenEle.style.webkitTransform ='translate(0px,0px)';
+	//oldScreenEle.style.webkitTransform = 'translate(-320px,0px)';
+} else {
+	//newScreenEle.style.display = 'block';
+	//oldScreenEle.style.display = 'none';
+}
 
 function navAnim()
 {
